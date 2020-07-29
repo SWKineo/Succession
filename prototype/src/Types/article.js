@@ -1,4 +1,4 @@
-export default class ArticleVersion {
+export default class ArticleAttempt {
     constructor() {
         this.id = -1
         this.version = -1
@@ -6,25 +6,20 @@ export default class ArticleVersion {
         this.formalism = "No formalism"
         this.metaphor = "No metaphor"
         this.formalismMetaphorMapping = [ [1, 2, 3], [1, 2, 2] ]
-        this.body = [ new ArticleContents("Some text"), new ArticleContents(new ArticleContents("Other text")) ]
+        this.body = [
+            new AttemptContents("First set of words "),
+            new AttemptContents("expandable words", new AttemptContents("Expansion Text")),
+            new AttemptContents(" second set of words")
+        ]
+        this.theorems = []
     }
 }
 
-class ArticleContents {
-    constructor(contents) {
-        if (contents instanceof String) {
-            this.text = contents
-            this.expansion = undefined
-        } else {
-            this.text = undefined
-            this.expansion = contents
-        }
-    }
 
-    getContents() {
-        if (this.expansion === undefined)
-            return this.text
-        else
-            return this.expansion
+class AttemptContents {
+
+    constructor(text, expansion) {
+        this.text = text
+        this.expansion = expansion
     }
 }

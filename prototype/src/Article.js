@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ArticleVersion from './Types/article.js'
+import ArticleAttempt from './Types/article.js';
 
-let sampleArticle = new ArticleVersion()
+let sampleArticle = new ArticleAttempt()
 
 export default class Article extends Component {
     constructor(props) {
@@ -16,8 +16,13 @@ export default class Article extends Component {
         return (
             <div>
                 <p>{sampleArticle.title}</p>
-                <p>{sampleArticle}</p>
+                <p>{sampleArticle.formalism}</p>
+                <p>{sampleArticle.metaphor}</p>
+                {sampleArticle.body.map((chunk, index, _) => {
+                    return <p key={index}>{chunk.text}</p>
+                })}
             </div>
         )
     }
+
 }

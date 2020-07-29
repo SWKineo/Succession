@@ -13,7 +13,7 @@ function Prototype() {
     <Router>
       <Switch>
         <Route
-          path="/:article/:version"
+          path="/page/:article/:version"
           component={Article}
         />
       </Switch>
