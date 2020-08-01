@@ -1,0 +1,15 @@
+button.link {
+    background: #fffebb;
+    border: none;
+    padding: 6px 4px 6px 4px;
+    /*input has OS specific font-family*/
+    cursor: pointer;
+}
+
+button.link:hover {
+    background: rgb(255, 253, 119);
+    border: none;
+    padding: 6px 4px 6px 4px;
+    /*input has OS specific font-family*/
+    cursor: pointer;
+}

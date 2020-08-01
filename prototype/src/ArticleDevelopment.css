@@ -1,0 +1,15 @@
+p.TestedSubmissions {
+    display: inline
+}
+
+div.TestedSubmissions {
+    display: inline-block
+}
+
+p.UntestedSubmissions {
+    display: inline
+}
+
+div.UntestedSubmissions {
+    display: inline-block
+}
