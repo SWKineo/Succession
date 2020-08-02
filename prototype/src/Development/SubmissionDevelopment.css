@@ -33,10 +33,22 @@ div.CritiqueList {
 
 
 div.CritiqueHolder {
-    margin: 0;
-    padding: 0;
+    padding-left: 1vw;
     background-color: black;
     color: white;
+    border-style: solid;
+    border-width: 0 0 2px 0;
+    border-color: white;
+}
+
+div.CritiqueHolder:hover {
+    margin-left: 0.1vw;
+    padding-left: 1vw;
+    background-color: rgb(51, 51, 51);
+    color: white;
+    border-style: solid;
+    border-width: 0 0 2px 0;
+    border-color: white;
 }
 
 p.CritiqueTitle {
