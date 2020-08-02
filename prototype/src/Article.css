@@ -1,3 +1,9 @@
+div.Article {
+    width: inherit;
+    height: inherit;
+    padding: 1vw 2vw 1vw 2vw;
+}
+
 button.link {
     background: #fffebb;
     border: none;

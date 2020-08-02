@@ -5,7 +5,9 @@ import {
   Route
 } from 'react-router-dom'
 import Article from './Article'
-import ArticleDevelopment from './ArticleDevelopment'
+import DevelopmentOverview from './Development/DevelopmentOverview'
+import SubmissionDevelopment from './Development/SubmissionDevelopment'
+import SubmissionCritique from './Development/SubmissionCritique'
 import './Prototype.css'
 
 function Prototype() {
@@ -13,11 +15,19 @@ function Prototype() {
     <Router>
       <Switch>
         <Route
-          exact path="/page/:article/development"
-          component={ArticleDevelopment}
+          exact path="/page/:article/work"
+          component={DevelopmentOverview}
         />
         <Route
-          path="/page/:article/:version"
+          exact path="/page/:article/submission/:submission/critique/:critique"
+          component={SubmissionCritique}
+        />
+        <Route
+          exact path="/page/:article/submission/:submission/work"
+          component={SubmissionDevelopment}
+        />
+        <Route
+          exact path="/page/:article/submission/:submission"
           component={Article}
         />
       </Switch>

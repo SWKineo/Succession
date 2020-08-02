@@ -1,0 +1,98 @@
+div.DevelopmentOverview {
+    width: inherit;
+    height: inherit;
+    padding: 2%;
+}
+
+
+
+div.TopSubmissions {
+    width: 100%;
+}
+
+p.TestedSubmissions {
+    display: inline;
+}
+
+div.TestedSubmissions {
+    display: inline-block;
+}
+
+p.UntestedSubmissions {
+    display: inline;
+}
+
+div.UntestedSubmissions {
+    width: 100%;
+    display: inline-block;
+}
+
+
+
+div.TopSubmissionList {
+    width: 100%;
+    overflow: scroll;
+    white-space: nowrap;
+}
+
+
+
+div.SubmissionTable {
+    width: 100%;
+    border-style: solid;
+    border-width: 3px;
+    border-color: black;
+}
+
+div.TableHeader {
+    height: 100%;
+    width: 100%;
+    display: inline-grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+    justify-items: stretch;
+    align-items: stretch;
+    border-style: solid;
+    border-width: 0px 0px 4px 0px;
+}
+
+div.TableHeaderItem {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-style: solid;
+    border-width: 0px 0px 0px 2px;
+}
+
+p.TableHeaderItem {
+    margin: 0;
+    height: 100%;
+    text-align: center;
+}
+
+
+
+button.TableSubmission {
+    height: 100%;
+    width: 100%;
+    display: inline-grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+    justify-items: stretch;
+    align-items: stretch;
+    border-style: solid;
+    border-color: black;
+    border-width: 0px 0px 2px 0px;
+}
+
+div.TableSubmissionItem {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-style: solid;
+    border-width: 0px 0px 0px 2px;
+}
+
+p.TableSubmissionItem {
+    margin: 0;
+    height: 100%;
+    text-align: center;
+}

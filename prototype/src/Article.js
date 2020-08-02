@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 // import queryString from 'query-string'
-import Attempt, { AttemptContent } from './Types/article'
+import Submission, { Content } from './Types/article'
 import MetaphorFormalism from './Components/MetaphorFormalism'
 import './Article.css'
 
-let sampleArticle = new Attempt()
+let sampleArticle = new Submission()
 
 export default class Article extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ export default class Article extends Component {
 
     render() {
         return (
-            <div>
+            <div className="Article">
                 <p className="title">{sampleArticle.title}</p>
                 <MetaphorFormalism
                     formalism={sampleArticle.formalism}
@@ -43,7 +43,7 @@ export default class Article extends Component {
             console.log(currentParagraph)
             let chunk = body[i];
 
-            if (chunk.expansion === AttemptContent.PARAGRAPH) {
+            if (chunk.expansion === Content.PARAGRAPH) {
                 console.log("PARAGRAPH")
                 // Start new paragraph
                 currentParagraph = [ "" ]

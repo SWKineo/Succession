@@ -1,4 +1,4 @@
-export default class Attempt {
+export default class Submission {
     constructor() {
         this.id = -1
         this.version = -1
@@ -11,17 +11,17 @@ export default class Attempt {
         ]
         this.metaphorFormalismMapping = [ [1, 2, 3], [1, 2, 2] ]
         this.body = [
-            new AttemptContent("First set of words "),
-            new AttemptContent("expandable words", [ new AttemptContent("Expansion Text") ]),
-            new AttemptContent(" second set of words")
+            new Content("First set of words "),
+            new Content("expandable words", [ new Content("Expansion Text") ]),
+            new Content(" second set of words")
         ]
         this.theorems = []
     }
 }
 
 
-export class AttemptContent {
-    // CONSTANTS
+export class Content {
+    // Constant
     static PARAGRAPH = 101
 
     constructor(text, expansion) {

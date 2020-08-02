@@ -1,0 +1,49 @@
+div.SubmissionDevelopment {
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    display: inline-flex;
+    justify-content: stretch;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+
+
+div.ArticleHolder {
+    width: 70%;
+    height: 100%;
+    background: #fffcce;
+    box-shadow: 6px 6px 8px 3px rgba(0, 0, 0, 0.15);
+}
+
+
+
+div.CritiqueList {
+    width: 30%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    overflow: scroll;
+}
+
+
+
+div.CritiqueHolder {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+}
+
+p.CritiqueTitle {
+    font-size: medium;
+    font-weight: bold;
+}
+
+p.CritiqueComment {
+    font-size: small;
+}
