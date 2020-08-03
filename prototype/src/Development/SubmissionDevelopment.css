@@ -27,7 +27,8 @@ div.CritiqueList {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 

@@ -55,7 +55,7 @@ function Critique(props) {
         <div 
             className="CritiqueHolder"
             onClick={() => {
-                history.push(`/page/${props.articleId}/submission/${props.submissionId}/critique/${props.critiqueId}`)
+                history.push(`/page/${props.articleId}/version/${props.submissionId}/critique/${props.critiqueId}`)
             }}
         >
             <p className="CritiqueTitle">{props.critiqueTitle}</p>

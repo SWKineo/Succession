@@ -3,7 +3,11 @@ import { useHistory } from 'react-router-dom'
 import Article from '../Article'
 import './SubmissionCritique.css'
 
-
+let critique = { 
+    id: 2,
+    title: "Fix Stuff",
+    comment: "Make sure the stuff is fixed."
+}
 
 let submissions = new Array(15)
 submissions.fill({
@@ -16,18 +20,24 @@ export class SubmissionCritique extends Component {
     render() {
         return (
             <div className="SubmissionCritique">
-                <div className="ArticleHolder">
-                    <Article />
+                <div className="CritiqueHolder">
+                    {critique.title}<br/>
+                    {critique.comment}
                 </div>
-                <div className="SubmissionList">
-                    {submissions.map((submission, _, __) =>
-                        <Submission
-                            articleId={this.props.match.params.article}
-                            submissionId={submission.id}
-                            submissionTitle={submission.title}
-                            submissionComment={submission.comment}
-                        />
-                    )}
+                <div className="SubmissionImprovements">
+                    <div className="ArticleHolder">
+                        <Article />
+                    </div>
+                    <div className="SubmissionList">
+                        {submissions.map((submission, _, __) =>
+                            <Submission
+                                articleId={this.props.match.params.article}
+                                submissionId={submission.id}
+                                submissionTitle={submission.title}
+                                submissionComment={submission.comment}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
         )
@@ -54,7 +64,7 @@ function Submission(props) {
         <div 
             className="SubmissionHolder"
             onClick={() => {
-                history.push(`/page/${props.articleId}/submission/${props.submissionId}/work`)
+                history.push(`/page/${props.articleId}/version/${props.submissionId}/work`)
             }}
         >
             <p className="SubmissionTitle">{props.submissionTitle}</p>

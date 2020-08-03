@@ -19,15 +19,15 @@ function Prototype() {
           component={DevelopmentOverview}
         />
         <Route
-          exact path="/page/:article/submission/:submission/critique/:critique"
+          exact path="/page/:article/version/:submission/critique/:critique"
           component={SubmissionCritique}
         />
         <Route
-          exact path="/page/:article/submission/:submission/work"
+          exact path="/page/:article/version/:submission/work"
           component={SubmissionDevelopment}
         />
         <Route
-          exact path="/page/:article/submission/:submission"
+          exact path="/page/:article/version/:submission"
           component={Article}
         />
       </Switch>

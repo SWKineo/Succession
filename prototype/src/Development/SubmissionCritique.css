@@ -1,7 +1,19 @@
 div.SubmissionCritique {
     width: 100vw;
     height: 100vh;
-    margin: auto;
+    overflow: hidden;
+}
+
+
+
+div.CritiqueHolder {
+    width: 100vw;
+    height: 10vh;
+}
+
+div.SubmissionImprovements {
+    width: 100vw;
+    height: 90vh;
     display: inline-flex;
     justify-content: stretch;
     align-items: stretch;
@@ -27,7 +39,8 @@ div.SubmissionList {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 
