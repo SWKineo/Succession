@@ -3,7 +3,7 @@ export default class Submission {
         this.article = article
         this.version = version
         this.title = `Article ${article}.${version}`
-        this.qualityRating = version % 3
+        this.quality = version % 3
         this.potential = version % 3
         this.formalism = "No formalism"
         this.metaphor = [ 
