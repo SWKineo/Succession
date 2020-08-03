@@ -1,21 +1,50 @@
 div.Article {
-    width: inherit;
-    height: inherit;
-    padding: 1vw 2vw 1vw 2vw;
+    width: 95%;
+    height: 95%;
+    margin: auto;
+    background: #ffffff;
+    box-shadow: 6px 6px 8px 3px rgba(0, 0, 0, 0.15);
 }
 
-button.link {
+
+
+p.ArticleTitle {
+    padding-top: 3%;
+    text-align: center;
+}
+
+
+
+p.NormalText {
+    padding: 0 4% 3% 4%;
+    font: serif;
+    font-size: 1rem;
+    letter-spacing: 0.015rem;
+}
+
+
+
+button.ExpandableText {
     background: #fffebb;
     border: none;
-    padding: 6px 4px 6px 4px;
-    /*input has OS specific font-family*/
+    padding: 0px 0px 0px 0px;
     cursor: pointer;
+    font: serif;
+    font-size: 1rem;
 }
 
-button.link:hover {
+button.ExpandableText:hover {
     background: rgb(255, 253, 119);
     border: none;
-    padding: 6px 4px 6px 4px;
-    /*input has OS specific font-family*/
+    padding: 0px 0px 0px 0px;
     cursor: pointer;
+    font: serif;
+    font-size: 1rem;
+}
+
+
+
+div.Expansion {
+    margin: 10% 0 10% 5%;
+    font: serif;
 }

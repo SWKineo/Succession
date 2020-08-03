@@ -1,8 +1,10 @@
 export default class Submission {
-    constructor() {
-        this.id = -1
-        this.version = -1
-        this.title = "No Title"
+    constructor(article, version) {
+        this.article = article
+        this.version = version
+        this.title = `Article ${article}.${version}`
+        this.qualityRating = version % 3
+        this.potential = version % 3
         this.formalism = "No formalism"
         this.metaphor = [ 
             { text: "No", formalismRange: [0, 2] }, 
@@ -11,9 +13,14 @@ export default class Submission {
         ]
         this.metaphorFormalismMapping = [ [1, 2, 3], [1, 2, 2] ]
         this.body = [
-            new Content("First set of words "),
-            new Content("expandable words", [ new Content("Expansion Text") ]),
-            new Content(" second set of words")
+            new Content("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et "),
+            new Content("magna aliqua.", [
+                new Content("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea "),
+                new Content("commodo consequat.", [
+                    new Content("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.") 
+                ])
+            ]),
+            new Content(" Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est.")
         ]
         this.theorems = []
     }
@@ -21,11 +28,14 @@ export default class Submission {
 
 
 export class Content {
+    static idCounter = 0;
+
     // Constant
     static PARAGRAPH = 101
 
     constructor(text, expansion) {
         this.text = text
         this.expansion = expansion
+        this.id = Content.idCounter++
     }
 }

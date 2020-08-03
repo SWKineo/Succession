@@ -2,59 +2,72 @@ div.SubmissionCritique {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    background-color: black;
 }
 
 
 
-div.CritiqueHolder {
-    width: 100vw;
-    height: 10vh;
+div.CritiqueHeader {
+    color: white;
+    width: 80vw;
+    padding: 2%;
 }
+
+
+
+p.CritiqueHeaderTitle {
+    width: 80vw;
+    font-weight: bold;
+    text-align:center;
+}
+
+p.CritiqueHeaderComment {
+    width: 60vw;
+    margin: auto;
+    font-size: 0.8rem;
+    text-align: justify;
+}
+
+
 
 div.SubmissionImprovements {
     width: 100vw;
-    height: 90vh;
-    display: inline-flex;
-    justify-content: stretch;
-    align-items: stretch;
     overflow: hidden;
+    display: inline-flex;
+    background-color: black;
 }
 
 
 
 div.ArticleHolder {
-    width: 70%;
-    height: 100%;
-    background: #fffcce;
-    box-shadow: 6px 6px 8px 3px rgba(0, 0, 0, 0.15);
+    width: 80vw;
+    height: auto;
+    display: inline-flex;
 }
 
 
 
-div.SubmissionList {
-    width: 30%;
-    height: 100%;
+div.ImprovementList {
+    width: 20vw;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
-
-
-div.SubmissionHolder {
+div.ImprovementHolder {
     padding-left: 1vw;
-    background-color: black;
     color: white;
     border-style: solid;
     border-width: 0 0 2px 0;
     border-color: white;
+    cursor: pointer;
 }
 
-div.SubmissionHolder:hover {
+div.ImprovementHolder:hover, div.ImprovementHolderSelected {
     margin-left: 0.1vw;
     padding-left: 1vw;
     background-color: rgb(51, 51, 51);
@@ -62,13 +75,10 @@ div.SubmissionHolder:hover {
     border-style: solid;
     border-width: 0 0 2px 0;
     border-color: white;
+    cursor: pointer;
 }
 
-p.SubmissionTitle {
+p.ImprovementTitle {
     font-size: medium;
     font-weight: bold;
-}
-
-p.SubmissionComment {
-    font-size: small;
 }

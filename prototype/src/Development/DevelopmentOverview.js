@@ -83,7 +83,7 @@ class TopSubmissions extends Component {
                         </div>
                         <div className="TopSubmissionList">
                             {article.testedSubmissions.map((submission, index, _) => (
-                                <button>{submission.title}</button>
+                                <button key={index}>{submission.title}</button>
                             ))}
                         </div>
                     </div>
@@ -104,7 +104,7 @@ class TopSubmissions extends Component {
                         </button>
                         <div className="TopSubmissionList">
                             {article.untestedSubmissions.map((submission, index, _) => (
-                                <button>{submission.title}</button>
+                                <button key={index}>{submission.title}</button>
                             ))}
                         </div>
                     </div>
@@ -131,7 +131,7 @@ class SubmissionTable extends Component {
                         .concat(this.props.article.untestedSubmissions)
                         .sort((submissionA, submissionB) => submissionA.title.localeCompare(submissionB.title))
                         .map((submission, index, _) =>
-                            <button className="TableSubmission">
+                            <button key={index} className="TableSubmission">
                                 <div className="TableSubmissionItem">
                                     <p className="TableSubmissionItem">{`Attempt ${index + 1}`}</p>
                                 </div>

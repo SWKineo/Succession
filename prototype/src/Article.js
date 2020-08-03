@@ -4,8 +4,6 @@ import Submission, { Content } from './Types/article'
 import MetaphorFormalism from './Components/MetaphorFormalism'
 import './Article.css'
 
-let sampleArticle = new Submission()
-
 export default class Article extends Component {
     constructor(props) {
         super(props)
@@ -19,13 +17,13 @@ export default class Article extends Component {
     render() {
         return (
             <div className="Article">
-                <p className="title">{sampleArticle.title}</p>
+                <p className="ArticleTitle">{this.props.submission.title}</p>
                 <MetaphorFormalism
-                    formalism={sampleArticle.formalism}
-                    metaphor={sampleArticle.metaphor}
-                    mapping={sampleArticle.metaphorFormalismMapping}
+                    formalism={this.props.submission.formalism}
+                    metaphor={this.props.submission.metaphor}
+                    mapping={this.props.submission.metaphorFormalismMapping}
                 />
-                {this.renderBody(sampleArticle.body)}
+                {this.renderBody(this.props.submission.body)}
             </div>
         )
     }
@@ -37,33 +35,33 @@ export default class Article extends Component {
         let paragraphs = [ [ "" ] ]
         let currentParagraph = paragraphs[0]
 
-        console.log(paragraphs)
-        console.log(body)
+        // console.log(paragraphs)
+        // console.log(body)
         for (let i = 0; i < body.length; i++) {
-            console.log(currentParagraph)
+            // console.log(currentParagraph)
             let chunk = body[i];
 
             if (chunk.expansion === Content.PARAGRAPH) {
-                console.log("PARAGRAPH")
+                // console.log("PARAGRAPH")
                 // Start new paragraph
                 currentParagraph = [ "" ]
                 paragraphs.push(currentParagraph)
                 
             } else if (chunk.expansion === undefined) {
-                console.log(currentParagraph)
+                // console.log(currentParagraph)
                 // Add text to current paragraph
                 currentParagraph[currentParagraph.length - 1] += chunk.text
-                console.log(currentParagraph)
+                // console.log(currentParagraph)
             } else {
                 // Add link to paragraph: need to know if it's expanded
-                if (this.state.expanded.includes(i)) {
+                if (this.state.expanded.includes(chunk.id)) {
                     // Expanded: append link to close and expanded content
                     currentParagraph.push({
                         text: chunk.text,
                         onClick: _ => {
                             this.setState({
                                 expanded: this.state.expanded.filter(
-                                    expandedIndex => expandedIndex !== i
+                                    expandedIndex => expandedIndex !== chunk.id
                                 )
                             })
                         }
@@ -79,7 +77,7 @@ export default class Article extends Component {
                         text: chunk.text,
                         onClick: _ => {
                             this.setState({
-                                expanded: this.state.expanded.concat(i)
+                                expanded: this.state.expanded.concat(chunk.id)
                             })
                         }
                     })
@@ -88,12 +86,12 @@ export default class Article extends Component {
             }
         }
 
-        // console.log(paragraphs)
+        // // console.log(paragraphs)
 
         return (
             <div key={Date.now() % 10000}>
                 {paragraphs.map((paragraph, index, _) => paragraph.expansion === undefined ?
-                    <p key={index}>
+                    <p className="NormalText" key={index}>
                         {
                             paragraph.map((piece, i, _) => {
                                 if (typeof piece === "string") {
@@ -102,7 +100,7 @@ export default class Article extends Component {
                                     return (
                                         <button
                                             key={i}
-                                            className="link"
+                                            className="ExpandableText"
                                             onClick={piece.onClick}
                                         >
                                             {piece.text}
@@ -112,7 +110,9 @@ export default class Article extends Component {
                             })
                         }
                     </p> :
-                    this.renderBody(paragraph.expansion)
+                    <div className="Expansion">
+                        {this.renderBody(paragraph.expansion)}
+                    </div>
                 )}
             </div>
         )
@@ -120,7 +120,7 @@ export default class Article extends Component {
 
 }
 
-// {sampleArticle.body.map((chunk, index, _) => {
+// {this.submission.body.map((chunk, index, _) => {
 //     let expanded = queryString.parse(this.props.location.search)
 
 //     if (chunk.expansion === undefined) {
@@ -135,8 +135,8 @@ export default class Article extends Component {
 //         )
 //     }
     
-//     console.log(queryString.stringify({index}))
-//     console.log(Object.keys(expanded).length === 0)
+//     // console.log(queryString.stringify({index}))
+//     // console.log(Object.keys(expanded).length === 0)
 //     let search = ""
 //     if (Object.keys(expanded).length === 0) {
 //         search = `?${queryString.stringify({ index })}`

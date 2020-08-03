@@ -134,8 +134,8 @@ export default class Article extends Component {
 //         )
 //     }
     
-//     console.log(queryString.stringify({index}))
-//     console.log(Object.keys(expanded).length === 0)
+//     // console.log(queryString.stringify({index}))
+//     // console.log(Object.keys(expanded).length === 0)
 //     let search = ""
 //     if (Object.keys(expanded).length === 0) {
 //         search = `?${queryString.stringify({ index })}`

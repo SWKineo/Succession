@@ -31,7 +31,8 @@ div.UntestedSubmissions {
 
 div.TopSubmissionList {
     width: 100%;
-    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
     white-space: nowrap;
 }
 
