@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { useHistory } from 'react-router-dom'
 import Article from '../Article'
-import Submission from '../Types/article.js'
 import './SubmissionDevelopment.css'
 
 
@@ -14,14 +13,22 @@ critiques.fill({
 })
 
 export class SubmissionDevelopment extends Component {
+    constructor(props) {
+        super(props)
+
+        this.submission = this.props.article.getSubmission(this.props.match.params.version)
+    }
+
     render() {
+        
+
         return (
             <div className="SubmissionDevelopment">
                 <div className="ArticleHolder">
-                    <Article submission={new Submission(4, 7)} />
+                    <Article article={this.props.article} match={this.props.match} />
                 </div>
                 <div className="CritiqueList">
-                    {critiques.map((critique, _, __) =>
+                    {this.submission.critiques.map((critique, _, __) =>
                         <Critique
                             articleId={this.props.match.params.article}
                             submissionId={this.props.match.params.version}

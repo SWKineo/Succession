@@ -3,6 +3,15 @@ div.SubmissionCritique {
     height: 100vh;
     overflow: hidden;
     background-color: black;
+    display: inline-flex;
+}
+
+
+
+div.CritiqueAndArticles {
+    width: 100vw;
+    overflow: hidden;
+    background-color: black;
 }
 
 
@@ -26,15 +35,6 @@ p.CritiqueHeaderComment {
     margin: auto;
     font-size: 0.8rem;
     text-align: justify;
-}
-
-
-
-div.SubmissionImprovements {
-    width: 100vw;
-    overflow: hidden;
-    display: inline-flex;
-    background-color: black;
 }
 
 

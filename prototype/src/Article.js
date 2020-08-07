@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 // import queryString from 'query-string'
-import Submission, { Content } from './Types/article'
+import Submission from './Types/article'
 import MetaphorFormalism from './Components/MetaphorFormalism'
 import './Article.css'
 
 export default class Article extends Component {
     constructor(props) {
         super(props)
+
+        if (props.version) {
+            this.submission = this.props.article.getSubmission(props.version)
+        } else {
+            this.submission = this.props.article.getSubmission(this.props.match.params.version)
+        }
 
         this.state = {
             fmMapping: [],
@@ -15,21 +21,28 @@ export default class Article extends Component {
     }
 
     render() {
+        // Check if version needs to be updated
+        if (this.props.version !== undefined && this.props.version !== this.submission.version) {
+            this.submission = this.props.article.getSubmission(this.props.version)
+        }
+
         return (
             <div className="Article">
-                <p className="ArticleTitle">{this.props.submission.title}</p>
+                <p className="ArticleTitle">
+                    {this.submission.name}
+                </p>
                 <MetaphorFormalism
-                    formalism={this.props.submission.formalism}
-                    metaphor={this.props.submission.metaphor}
-                    mapping={this.props.submission.metaphorFormalismMapping}
+                    formalism={this.submission.formalism}
+                    metaphor={this.submission.metaphor}
+                    mapping={this.submission.metaphorFormalismMapping}
                 />
-                {this.renderBody(this.props.submission.body)}
+                {this.renderBody(this.submission.body)}
             </div>
         )
     }
 
     /**
-     * Renders an article body (an array of ArticleContents)
+     * Renders an article body (an array of { text, expansion, id }'s )
      */
     renderBody(body) {
         let paragraphs = [ [ "" ] ]
@@ -41,7 +54,7 @@ export default class Article extends Component {
             // console.log(currentParagraph)
             let chunk = body[i];
 
-            if (chunk.expansion === Content.PARAGRAPH) {
+            if (chunk.expansion === Submission.PARAGRAPH) {
                 // console.log("PARAGRAPH")
                 // Start new paragraph
                 currentParagraph = [ "" ]

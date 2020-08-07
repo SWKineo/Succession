@@ -25,7 +25,7 @@ export default class Article extends Component {
         for (let i = 0; i < body.length; i++) {
             let chunk = body[i];
 
-            if (chunk.expansion === AttemptContent.PARAGRAPH) {
+            if (chunk.expansion === AttemptSubmission.PARAGRAPH) {
                 // Start new paragraph
                 paragraphs.push(<p>{currentParagraph}</p>)
                 currentParagraph = ""

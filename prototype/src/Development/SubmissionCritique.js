@@ -1,74 +1,69 @@
 import React, { Component } from 'react'
-import { useHistory } from 'react-router-dom'
 import Article from '../Article'
-import Submission from '../Types/article'
 import './SubmissionCritique.css'
 
-let submission = new Submission(10, 22)
 
-let critique = { 
-    id: 2,
-    title: "Fix Stuff",
-    comment: "Make sure the stuff is fixed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-}
-
-let improvements = new Array(15)
 
 export class SubmissionCritique extends Component {
     constructor(props) {
         super(props)
 
-        improvements = []
-        for (let i = 0; i < 15; i++) {
-            improvements.push(new Submission(this.props.match.params.article, i))
-        }
+        this.submission = this.props.article.getSubmission(this.props.match.params.version)
+        this.critique = this.props.article.getCritique(this.submission, this.props.match.params.critique)
 
         this.state = {
-            currentImprovement: improvements[0]
+            currentImprovement: this.critique.improvements[0]
         }
     }
     render() {
         return (
             <div className="SubmissionCritique">
-                <div className="CritiqueHeader">
-                    <p className="CritiqueHeaderTitle">{critique.title}</p>
-                    <p className="CritiqueHeaderComment">{critique.comment}</p>
-                </div>
-                <div className="SubmissionImprovements">
+                <div className="CritiqueAndArticles">
+                    <div className="CritiqueHeader">
+                        <p className="CritiqueHeaderTitle">{this.critique.title}</p>
+                        <p className="CritiqueHeaderComment">{this.critique.comment}</p>
+                    </div>
                     <div className="ArticleHolder">
                         <div>
                             <Article 
-                                submission={submission}
+                                article={this.props.article}
+                                match={this.props.match}
                             />
                         </div>
                         <div>
                             <Article 
-                                submission={this.state.currentImprovement}
+                                article={this.props.article}
+                                version={this.state.currentImprovement}
+                                match={this.props.match}
                             />
                         </div>
                     </div>
-                    <div className="ImprovementList">
-                        {improvements.map((improvement, _, __) =>
+                </div>
+                <div className="ImprovementList">
+                    {this.critique.improvements.map((improvementVersion, _, __) => {
+                        let improvement = this.props.article.getSubmission(improvementVersion)
+                        return (
                             <Improvement
-                                key={improvement.version}
-                                articleId={submission.article}
-                                versionId={submission.version}
-                                critiqueId={critique.id}
-                                improvementTitle={improvement.title}
-                                improvementId={improvement.version}
+                                key={improvementVersion}
+                                articleId={this.props.article.id}
+                                versionId={this.submission.version}
+                                critiqueId={this.critique.id}
+                                improvementTitle={improvement.name}
+                                improvementId={improvementVersion}
                                 selectImprovement={
                                     () => {
-                                        if (improvement.version !== this.state.currentImprovement.version) {
-                                            this.setState({ currentImprovement: improvement })
+                                        console.log(`${improvementVersion} - ${this.state.currentImprovement}`)
+                                        if (improvementVersion !== this.state.currentImprovement) {
+                                            this.setState({ currentImprovement: improvementVersion })
                                         } else {
-                                            this.props.history.push(`/page/${submission.article}/version/${improvement.version}/work`)
+                                            this.props.history.push(`/page/${this.props.article.id}/version/${improvementVersion}/work`)
                                         }
                                     }
                                 }
-                                selectedImprovement={this.state.currentImprovement.version}
+                                selectedImprovement={this.state.currentImprovement}
                             />
-                        )}
-                    </div>
+                        )
+                    })}
                 </div>
             </div>
         )
@@ -76,7 +71,6 @@ export class SubmissionCritique extends Component {
 }
 
 function Improvement(props) {
-    const history = useHistory()
     return (
         <div 
             className={props.selectedImprovement !== props.improvementId ? 
