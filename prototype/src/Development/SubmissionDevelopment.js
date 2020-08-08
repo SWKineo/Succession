@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { useHistory } from 'react-router-dom'
-import Article from '../Article'
+import ArticleView from '../ArticleView'
+import Article, { Critique } from '../Types/article.js'
 import './SubmissionDevelopment.css'
 
 
@@ -16,7 +17,11 @@ export class SubmissionDevelopment extends Component {
     constructor(props) {
         super(props)
 
-        this.submission = this.props.article.getSubmission(this.props.match.params.version)
+        this.state = {
+            submission: this.props.article.getSubmission(this.props.match.params.version),
+            critiqueBox: false,
+            critiqueComment: ""
+        }
     }
 
     render() {
@@ -24,12 +29,72 @@ export class SubmissionDevelopment extends Component {
 
         return (
             <div className="SubmissionDevelopment">
-                <div className="ArticleHolder">
-                    <Article article={this.props.article} match={this.props.match} />
-                </div>
+                {
+                    this.state.critiqueBox ? (
+                        <div className="ArticleAndComment">
+                            <div className="SubmissionArticleHolderCritiquing">
+                                <ArticleView article={this.props.article} version={this.props.match.params.version} />
+                                <button 
+                                    className="AddCritiqueButton"
+                                    onClick={ _ => { this.setState({
+                                        critiqueBox: !this.state.critiqueBox 
+                                    })}}>
+                                    Critique
+                                </button>
+                            </div>
+                            <div className="CritiqueBox">
+                                <input
+                                    className="CritiqueTitle"
+                                    value={this.state.critiqueTitle}
+                                    onChange={ event => { this.setState({
+                                        critiqueTitle: event.target.value
+                                    })}}
+                                />
+                                <textarea
+                                    className="CritiqueComment"
+                                    value={this.state.critiqueComment}
+                                    onChange={ event => { this.setState({
+                                        critiqueComment: event.target.value
+                                    })}}
+                                />
+                                <button
+                                    className="CritiqueCommentSubmit"
+                                    onClick={ _ => {
+                                        if (this.state.critiqueTitle != "" && this.state.critiqueComment != "") {
+                                            this.setState({
+                                                critiqueTitle: "",
+                                                critiqueComment: "",
+                                                submission: this.state.submission.addCritique(
+                                                    new Critique(
+                                                        null,
+                                                        this.state.critiqueTitle,
+                                                        this.state.critiqueComment,
+                                                        []
+                                                    )
+                                                )
+                                            })
+                                        }
+                                     }}>
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    ) : <div className="ArticleAndComment">
+                            <div className="SubmissionArticleHolderNormal">
+                                <ArticleView article={this.props.article} version={this.props.match.params.version} />
+                                <button 
+                                    className="AddCritiqueButton"
+                                    onClick={ _ => { this.setState({
+                                        critiqueBox: !this.state.critiqueBox 
+                                     })}}>
+                                    Critique
+                                </button>
+                            </div>
+                        </div>
+                }
                 <div className="CritiqueList">
-                    {this.submission.critiques.map((critique, _, __) =>
-                        <Critique
+                    {this.state.submission.critiques.map((critique, _, __) =>
+                        <CritiqueListItem
                             articleId={this.props.match.params.article}
                             submissionId={this.props.match.params.version}
                             critiqueId={critique.id}
@@ -43,7 +108,7 @@ export class SubmissionDevelopment extends Component {
     }
 }
 
-function Critique(props) {
+function CritiqueListItem(props) {
     const history = useHistory()
 
     // Abbreviate comment

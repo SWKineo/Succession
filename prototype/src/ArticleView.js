@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 // import queryString from 'query-string'
-import Submission from './Types/article'
+import Article from './Types/article'
 import MetaphorFormalism from './Components/MetaphorFormalism'
-import './Article.css'
+import './ArticleView.css'
 
-export default class Article extends Component {
+export default class ArticleView extends Component {
     constructor(props) {
         super(props)
 
@@ -13,6 +13,9 @@ export default class Article extends Component {
         } else {
             this.submission = this.props.article.getSubmission(this.props.match.params.version)
         }
+
+        console.log(`props.version: ${props.version}`)
+        console.log(this.submission)
 
         this.state = {
             fmMapping: [],
@@ -29,14 +32,14 @@ export default class Article extends Component {
         return (
             <div className="Article">
                 <p className="ArticleTitle">
-                    {this.submission.name}
+                    {this.submission.content.name}
                 </p>
                 <MetaphorFormalism
-                    formalism={this.submission.formalism}
-                    metaphor={this.submission.metaphor}
-                    mapping={this.submission.metaphorFormalismMapping}
+                    formalism={this.submission.content.formalism}
+                    metaphor={this.submission.content.metaphor}
+                    mapping={this.submission.content.metaphorFormalismMapping}
                 />
-                {this.renderBody(this.submission.body)}
+                {this.renderBody(this.submission.content.body)}
             </div>
         )
     }
@@ -54,7 +57,7 @@ export default class Article extends Component {
             // console.log(currentParagraph)
             let chunk = body[i];
 
-            if (chunk.expansion === Submission.PARAGRAPH) {
+            if (chunk.expansion === Article.PARAGRAPH) {
                 // console.log("PARAGRAPH")
                 // Start new paragraph
                 currentParagraph = [ "" ]

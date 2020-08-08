@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Article from '../Article'
+import ArticleView from '../ArticleView'
 import './SubmissionCritique.css'
 
 
@@ -9,12 +9,13 @@ export class SubmissionCritique extends Component {
         super(props)
 
         this.submission = this.props.article.getSubmission(this.props.match.params.version)
-        this.critique = this.props.article.getCritique(this.submission, this.props.match.params.critique)
+        this.critique = this.submission.getCritique(this.props.match.params.critique)
 
         this.state = {
             currentImprovement: this.critique.improvements[0]
         }
     }
+    
     render() {
         return (
             <div className="SubmissionCritique">
@@ -23,15 +24,15 @@ export class SubmissionCritique extends Component {
                         <p className="CritiqueHeaderTitle">{this.critique.title}</p>
                         <p className="CritiqueHeaderComment">{this.critique.comment}</p>
                     </div>
-                    <div className="ArticleHolder">
+                    <div className="CritiqueArticleHolder">
                         <div>
-                            <Article 
+                            <ArticleView 
                                 article={this.props.article}
                                 match={this.props.match}
                             />
                         </div>
                         <div>
-                            <Article 
+                            <ArticleView 
                                 article={this.props.article}
                                 version={this.state.currentImprovement}
                                 match={this.props.match}

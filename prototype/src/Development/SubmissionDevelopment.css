@@ -11,16 +11,67 @@ div.SubmissionDevelopment {
 
 
 
-div.ArticleHolder {
-    width: 70%;
-    height: auto;
+div.ArticleAndComment {
+    width: 70vw;
     box-shadow: 6px 6px 8px 3px rgba(0, 0, 0, 0.15);
+}
+
+div.SubmissionArticleHolderNormal {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+div.SubmissionArticleHolderCritiquing {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+}
+
+button.AddCritiqueButton {
+    position: absolute;
+    right: 1.5vw;
+    bottom: 2vw;
+    float: right;
+    z-index: 1;
+}
+
+div.CritiqueBox {
+    position: absolute;
+    width: 70vw;
+    height: calc(30vh - 8px);
+    bottom: 0;
+    border-style: solid;
+    border-width: 8px 0 0 0;
+}
+
+input.CritiqueTitle {
+    width: 100%;
+    height: 3vh;
+    font: 1.3em sans-serif;
+}
+
+textarea.CritiqueComment {
+    width: 100%;
+    height: 24.6vh;
+    font: serif;
+    font-size: 1.2em;
+}
+
+button.CritiqueCommentSubmit {
+    position: absolute;
+    right: 1.5vw;
+    bottom: 1.5vw;
+    float: right;
+    z-index: 1;
 }
 
 
 
 div.CritiqueList {
-    width: 30%;
+    position: absolute;
+    right: 0;
+    width: 30vw;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -29,6 +80,7 @@ div.CritiqueList {
     justify-content: flex-start;
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: black;
 }
 
 
