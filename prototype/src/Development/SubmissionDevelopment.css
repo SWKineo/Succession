@@ -114,4 +114,5 @@ p.CritiqueTitle {
 
 p.CritiqueComment {
     font-size: small;
+    white-space: pre-wrap;
 }
