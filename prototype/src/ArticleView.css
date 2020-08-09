@@ -21,6 +21,7 @@ p.NormalText {
     font: 1rem Georgia, 'Times New Roman', Times, serif;
     letter-spacing: 0.015rem;
     text-align: left;
+    white-space: pre-wrap;
 }
 
 

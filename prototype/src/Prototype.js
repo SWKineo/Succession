@@ -153,6 +153,7 @@ function Prototype(props) {
           render={(props) => (
             <DevelopmentOverview 
               article={article} 
+              articleId={props.match.article}
               history={props.history}
               match={props.match}
             />
@@ -163,6 +164,7 @@ function Prototype(props) {
           render={(props) => (
             <SubmissionCritique 
               article={article} 
+              articleId={props.match.article}
               version={props.match.params.version}
               critiqueId={props.match.params.critique}
               history={props.history}
@@ -174,9 +176,10 @@ function Prototype(props) {
           exact path="/page/:article/version/:version/work"
           render={(props) => (
             <SubmissionDevelopment 
-              article={article} 
+              article={article}
+              articleId={props.match.article}
+              version={props.match.params.version}
               history={props.history}
-              match={props.match}
             />
           )}
         />
@@ -185,6 +188,8 @@ function Prototype(props) {
           render={(props) => (
             <ArticleView 
               article={article} 
+              articleId={props.match.article}
+              version={props.match.params.version}
               history={props.history}
               match={props.match}
             />

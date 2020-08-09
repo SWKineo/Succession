@@ -20,10 +20,11 @@ export class SubmissionCritique extends Component {
         }
 
         this.state = {
-            submission: this.props.article.getSubmission(this.props.match.params.version),
-            critique: submission.getCritique(this.props.match.params.critique),
+            submission,
+            critique,
             currentImprovement: critique.improvements[0],
-            improvementBox: false,
+            improvementBox: critique.improvements.length === 0,
+            improvementName: "",
             improvementTitle: submission.content.title,
             improvementBody: copiedText
         }
@@ -46,6 +47,18 @@ export class SubmissionCritique extends Component {
                             this.state.improvementBox ? (
                                 <div className="ImprovementContents">
                                     <input
+                                        className="ImprovementName"
+                                        placeholder="Submission Name"
+                                        value={this.state.improvementName}
+                                        onChange={ event => {
+                                            this.setState({
+                                                improvementName: event.target.value
+                                            })
+                                        }}
+                                        autoFocus
+                                        tabIndex="1"
+                                    />
+                                    <input
                                         className="ImprovementTitle"
                                         value={this.state.improvementTitle}
                                         onChange={ event => {
@@ -53,6 +66,7 @@ export class SubmissionCritique extends Component {
                                                 improvementTitle: event.target.value
                                             })
                                         }}
+                                        tabIndex="2"
                                     />
                                     <MetaphorFormalism
                                         formalism={this.state.submission.content.formalism}
@@ -66,6 +80,7 @@ export class SubmissionCritique extends Component {
                                                 improvementBody: event.target.value
                                             })
                                         }}
+                                        tabIndex="3"
                                     />
                                 </div>
                             ) : <ArticleView 
@@ -81,7 +96,7 @@ export class SubmissionCritique extends Component {
                                     onClick={ _ => {
                                         let improvedVersion = new Submission(
                                             null,
-                                            "New and improved",
+                                            this.state.improvementName,
                                             new Content(
                                                 this.state.improvementTitle,
                                                 this.state.submission.content.formalism,
@@ -99,10 +114,14 @@ export class SubmissionCritique extends Component {
 
                                         this.setState({
                                             improvementBox: false,
-                                            selectedImprovement: improvedVersion.version,
+                                            improvementName: "",
+                                            improvementTitle: this.state.submission.content.title,
+                                            improvementBody: this.state.submission.content.body,
+                                            currentImprovement: improvedVersion.version,
                                             critique: this.state.critique.addImprovementToArticle(this.props.article, improvedVersion)
                                         })
-                                    }}>
+                                    }}
+                                    tabIndex="4">
                                     Submit
                                 </button>
                              ) : <button
