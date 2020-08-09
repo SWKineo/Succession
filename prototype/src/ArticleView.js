@@ -32,7 +32,7 @@ export default class ArticleView extends Component {
         return (
             <div className="Article">
                 <p className="ArticleTitle">
-                    {this.submission.content.name}
+                    {this.submission.content.title}
                 </p>
                 <MetaphorFormalism
                     formalism={this.submission.content.formalism}

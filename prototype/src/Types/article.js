@@ -60,7 +60,7 @@ export default class Article {
                 new Submission(
                     1,
                     "First try",
-                    Content.sampleContent(),
+                    Content.sampleContent(1),
                     [
                         new Critique(
                         1,
@@ -92,7 +92,7 @@ export default class Article {
                 new Submission(
                     2,
                     "One thing fixed",
-                    Content.sampleContent(),
+                    Content.sampleContent(2),
                     [
                         new Critique(
                             1,
@@ -107,7 +107,7 @@ export default class Article {
                 new Submission(
                     3,
                     "One thing fixed another way",
-                    Content.sampleContent(),
+                    Content.sampleContent(3),
                     [
                         new Critique(
                             1,
@@ -121,7 +121,7 @@ export default class Article {
                 new Submission(
                     4,
                     "Two things fixed",
-                    Content.sampleContent(),
+                    Content.sampleContent(4),
                     [
                         new Critique(
                             1,
@@ -136,7 +136,7 @@ export default class Article {
                 new Submission(
                     5,
                     "Missed spot fixed",
-                    Content.sampleContent(),
+                    Content.sampleContent(5),
                     [
                         new Critique(
                             1,
@@ -151,7 +151,7 @@ export default class Article {
                 new Submission(
                     6,
                     "Another look",
-                    Content.sampleContent(),
+                    Content.sampleContent(6),
                     [
                         new Critique(
                             1,
@@ -166,7 +166,7 @@ export default class Article {
                 new Submission(
                     7,
                     "A new angle",
-                    Content.sampleContent(),
+                    Content.sampleContent(7),
                     [
                         new Critique(
                             1,
@@ -181,7 +181,7 @@ export default class Article {
                 new Submission(
                     8,
                     "Another look",
-                    Content.sampleContent(),
+                    Content.sampleContent(8),
                     [
                         new Critique(
                             1,
@@ -194,9 +194,9 @@ export default class Article {
                     2.0
                 ),
                 new Submission(
-                    8,
+                    9,
                     "One last fix",
-                    Content.sampleContent(),
+                    Content.sampleContent(9),
                     [],
                     1.0,
                     2.5
@@ -263,9 +263,9 @@ export class Content {
         this.theorems = theorems
     }
 
-    static sampleContent() {
+    static sampleContent(version) {
         return new Content(
-            "Sample Article",
+            `Sample Article ${version}`,
             "No formalism",
             [ 
                 { text: "No", formalismRange: [0, 2] }, 

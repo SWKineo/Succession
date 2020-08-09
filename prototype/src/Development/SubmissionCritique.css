@@ -9,6 +9,7 @@ div.SubmissionCritique {
 
 
 div.CritiqueAndArticles {
+    height: 100vh; 
     width: 100vw;
     overflow: hidden;
     background-color: black;
@@ -17,14 +18,17 @@ div.CritiqueAndArticles {
 
 
 div.CritiqueHeader {
+    height: 15vh;
     color: white;
     width: 80vw;
-    padding: 2%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 
 
 p.CritiqueHeaderTitle {
+    margin-top: 1vh;
     width: 80vw;
     font-weight: bold;
     text-align:center;
@@ -33,16 +37,52 @@ p.CritiqueHeaderTitle {
 p.CritiqueHeaderComment {
     width: 60vw;
     margin: auto;
-    font-size: 0.8rem;
+    margin-bottom: 2vh;
+    font-size: 1em;
     text-align: justify;
+    white-space: pre-wrap;
 }
 
 
 
 div.CritiqueArticleHolder {
+    position: relative;
     width: 80vw;
-    height: auto;
+    height: 85vh;
     display: inline-flex;
+}
+
+button.AddImprovement {
+    position: absolute;
+    right: 1.5vw;
+    bottom: 1.5vw;
+}
+
+div.ImprovementContents {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+
+input.ImprovementTitle {
+    height: 3vh;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+textarea.ImprovementFormalism {
+
+}
+
+p.ImprovementMetaphor {
+
+}
+
+textarea.ImprovementBody {
+    width: 100%;
+    height: 81vh;
+    font: 1em serif;
 }
 
 
