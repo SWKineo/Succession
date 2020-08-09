@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ArticleView from '../ArticleView'
 import './SubmissionCritique.css'
 import { Submission, Content } from '../Types/article'
+import MetaphorFormalism from '../Components/MetaphorFormalism'
 
 
 
@@ -9,19 +10,21 @@ export class SubmissionCritique extends Component {
     constructor(props) {
         super(props)
 
-        this.submission = this.props.article.getSubmission(this.props.match.params.version)
-        this.critique = this.submission.getCritique(this.props.match.params.critique)
+        let submission = this.props.article.getSubmission(this.props.version)
+        let critique = submission.getCritique(this.props.critiqueId)
 
         let copiedText = ""
 
-        for (let i = 0; i < this.submission.content.body.length; i++) {
-            copiedText += this.submission.content.body[i].text
+        for (let i = 0; i < submission.content.body.length; i++) {
+            copiedText += submission.content.body[i].text
         }
 
         this.state = {
-            currentImprovement: this.critique.improvements[0],
-            improvementBox: true,
-            improvementTitle: this.submission.content.title,
+            submission: this.props.article.getSubmission(this.props.match.params.version),
+            critique: submission.getCritique(this.props.match.params.critique),
+            currentImprovement: critique.improvements[0],
+            improvementBox: false,
+            improvementTitle: submission.content.title,
             improvementBody: copiedText
         }
     }
@@ -31,8 +34,8 @@ export class SubmissionCritique extends Component {
             <div className="SubmissionCritique">
                 <div className="CritiqueAndArticles">
                     <div className="CritiqueHeader">
-                        <p className="CritiqueHeaderTitle">{this.critique.title}</p>
-                        <p className="CritiqueHeaderComment">{this.critique.comment}</p>
+                        <p className="CritiqueHeaderTitle">{this.state.critique.title}</p>
+                        <p className="CritiqueHeaderComment">{this.state.critique.comment}</p>
                     </div>
                     <div className="CritiqueArticleHolder">
                         <ArticleView 
@@ -51,6 +54,10 @@ export class SubmissionCritique extends Component {
                                             })
                                         }}
                                     />
+                                    <MetaphorFormalism
+                                        formalism={this.state.submission.content.formalism}
+                                        metaphor={this.state.submission.content.metaphor}
+                                        metaphorFormalismMapping={this.state.submission.content.metaphorFormalismMapping} />
                                     <textarea 
                                         className="ImprovementBody"
                                         value={this.state.improvementBody}
@@ -92,10 +99,9 @@ export class SubmissionCritique extends Component {
 
                                         this.setState({
                                             improvementBox: false,
-                                            selectedImprovement: improvedVersion.version
+                                            selectedImprovement: improvedVersion.version,
+                                            critique: this.state.critique.addImprovementToArticle(this.props.article, improvedVersion)
                                         })
-
-                                        // TODO: Add call to submit improvement
                                     }}>
                                     Submit
                                 </button>
@@ -112,14 +118,14 @@ export class SubmissionCritique extends Component {
                     </div>
                 </div>
                 <div className="ImprovementList">
-                    {this.critique.improvements.map((improvementVersion, _, __) => {
+                    {this.state.critique.improvements.map((improvementVersion, _, __) => {
                         let improvement = this.props.article.getSubmission(improvementVersion)
                         return (
                             <Improvement
                                 key={improvementVersion}
                                 articleId={this.props.article.id}
-                                versionId={this.submission.version}
-                                critiqueId={this.critique.id}
+                                versionId={this.state.submission.version}
+                                critiqueId={this.state.critique.id}
                                 improvementTitle={improvement.name}
                                 improvementId={improvementVersion}
                                 selectImprovement={

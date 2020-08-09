@@ -163,6 +163,8 @@ function Prototype(props) {
           render={(props) => (
             <SubmissionCritique 
               article={article} 
+              version={props.match.params.version}
+              critiqueId={props.match.params.critique}
               history={props.history}
               match={props.match}
             />

@@ -1,7 +1,12 @@
 p.Formalism {
     text-align: center;
+    margin: 0;
+    font: 1rem Georgia, 'Times New Roman', Times, serif;
 }
 
 p.Metaphor {
     text-align: center;
+    margin: 2% 0 0 0;
+    font: 1rem Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
 }
