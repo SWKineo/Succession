@@ -27,13 +27,16 @@ div.UntestedSubmissions {
     display: inline-block;
 }
 
-
-
 div.TopSubmissionList {
     width: 100%;
+    margin-top: 1%;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+}
+
+button.TopSubmission {
+    padding: 1%;
 }
 
 
@@ -49,7 +52,7 @@ div.TableHeader {
     height: 100%;
     width: 100%;
     display: inline-grid;
-    grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
     justify-items: stretch;
     align-items: stretch;
     border-style: solid;
@@ -73,15 +76,14 @@ p.TableHeaderItem {
 
 
 button.TableSubmission {
-    height: 100%;
+    height: 2vh;
     width: 100%;
+    margin: 0;
+    padding: 0;
     display: inline-grid;
-    grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
     justify-items: stretch;
     align-items: stretch;
-    border-style: solid;
-    border-color: black;
-    border-width: 0px 0px 2px 0px;
 }
 
 div.TableSubmissionItem {

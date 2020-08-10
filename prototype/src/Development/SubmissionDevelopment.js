@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { useHistory } from 'react-router-dom'
-import Rating from 'material-ui-rating'
+import Rating from '@material-ui/lab/Rating'
 import ArticleView from '../ArticleView'
 import Article, { Critique } from '../Types/article.js'
 import './SubmissionDevelopment.css'
@@ -13,6 +13,8 @@ export class SubmissionDevelopment extends Component {
 
         this.state = {
             submission: this.props.article.getSubmission(this.props.version),
+            qualityRating: 2,
+            potentialRating: 2,
             critiqueBox: false,
             critiqueComment: ""
         }
@@ -27,11 +29,28 @@ export class SubmissionDevelopment extends Component {
                             <div className="SubmissionArticleHolderCritiquing">
                                 <ArticleView article={this.props.article} version={this.props.version} />
                                 <div className="FeedbackBox">
+                                <Rating
+                                        className="QualityRating"
+                                        value={this.state.submission.quality}
+                                        max={3}
+                                        onChange={(_, newValue) => {
+                                            this.setState({ submission: this.state.submission.setQuality(newValue) })
+                                        }}
+                                    />
+                                    <Rating
+                                        className="PotentialRating"
+                                        value={this.state.submission.potential}
+                                        max={3}
+                                        onChange={(_, newValue) => {
+                                            this.setState({ submission: this.state.submission.setPotential(newValue) })
+                                        }}
+                                    />
                                     <button 
                                         className="AddCritiqueButton"
                                         onClick={ _ => { this.setState({
                                             critiqueBox: !this.state.critiqueBox 
-                                        })}}>
+                                        })}}
+                                    >
                                         Critique
                                     </button>
                                 </div>
@@ -80,14 +99,32 @@ export class SubmissionDevelopment extends Component {
                     ) : <div className="ArticleAndComment">
                             <div className="SubmissionArticleHolderNormal">
                                 <ArticleView article={this.props.article} version={this.props.version} />
-                                <button 
-                                    className="AddCritiqueButton"
-                                    onClick={ _ => { this.setState({
-                                        critiqueBox: !this.state.critiqueBox 
-                                     })}}
-                                     tabIndex="4">
-                                    Critique
-                                </button>
+                                <div className="FeedbackBox">
+                                    <Rating
+                                        className="QualityRating"
+                                        value={this.state.submission.qualityRating}
+                                        max={3}
+                                        onChange={(_, newValue) => {
+                                            this.setState({ submission: this.state.submission.setQuality(newValue) })
+                                        }}
+                                    />
+                                    <Rating
+                                        className="PotentialRating"
+                                        value={this.state.submission.potentialRating}
+                                        max={3}
+                                        onChange={(_, newValue) => {
+                                            this.setState({ submission: this.state.submission.setPotential(newValue) })
+                                        }}
+                                    />
+                                    <button 
+                                        className="AddCritiqueButton"
+                                        onClick={ _ => { this.setState({
+                                            critiqueBox: !this.state.critiqueBox 
+                                        })}}
+                                    >
+                                        Critique
+                                    </button>
+                                </div>
                             </div>
                         </div>
                 }

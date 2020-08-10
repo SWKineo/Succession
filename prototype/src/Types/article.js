@@ -226,6 +226,8 @@ export class Submission {
         this.potential = potential
         this.critiques = critiques
         this.content = content
+
+        this.generationDepth = 1
     }
 
     getCritique(critiqueId) {
@@ -239,6 +241,18 @@ export class Submission {
 
     addCritique(newCritique) {
         this.critiques.push(newCritique)
+
+        return this
+    }
+
+    setQuality(newRating) {
+        this.quality = newRating
+
+        return this
+    }
+
+    setPotential(newRating) {
+        this.potential = newRating
 
         return this
     }

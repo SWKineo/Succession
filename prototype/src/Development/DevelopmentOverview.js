@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './DevelopmentOverview.css'
+import Rating from '@material-ui/lab/Rating'
 
 
 
@@ -49,15 +50,46 @@ class TopSubmissions extends Component {
                             </button>
                         </div>
                         <div className="TopSubmissionList">
-                            {this.props.article.testedSubmissions.map((version, index, _) => (
-                                <button 
-                                    key={index}
-                                    className="TopSubmission"
-                                    onClick={() => {this.props.history.push(`/page/${this.props.article.id}/version/${version}/work`)}}
-                                >
-                                    {this.props.article.getSubmission(version).name}
-                                </button>
-                            ))}
+                            {this.props.article.testedSubmissions
+                                .sort(this.state.testedSortBy === TopSubmissions.POTENTIAL ?
+                                    (vA, vB) => this.props.article.getSubmission(vA).potential < this.props.article.getSubmission(vB).potential ? 1 : -1 :
+                                    (vA, vB) => this.props.article.getSubmission(vA).quality < this.props.article.getSubmission(vB).quality ? 1 : -1
+                                )
+                                .map((version, index, _) => {
+                                let submission = this.props.article.getSubmission(version)
+                                
+                                return (
+                                    <button 
+                                        key={index}
+                                        className="TopSubmission"
+                                        onClick={() => {this.props.history.push(`/page/${this.props.article.id}/version/${version}/work`)}}
+                                    >
+                                        <div className="TopSubmissionContents">
+                                            <p className="TopSubmissionContentsTitle">
+                                                {submission.name}
+                                            </p>
+                                            <h className="RatingLabel">Quality</h>
+                                            <Rating
+                                                value={submission.quality}
+                                                max={3}
+                                                precision={0.01}
+                                                size="small"
+                                                readOnly
+                                            />
+                                            <br/>
+                                            <h className="RatingLabel">Potenital</h>
+                                            <Rating
+                                                value={3}
+                                                max={3}
+                                                precision={0.01}
+                                                size="small"
+                                                readOnly
+                                            />
+                                        </div>
+                                    </button>
+                                )
+                            })
+                        }
                         </div>
                     </div>
                 ) : null}
@@ -78,17 +110,44 @@ class TopSubmissions extends Component {
                         <div className="TopSubmissionList">
                             {this.props.article.untestedSubmissions
                                 .sort(this.state.untestedSortBy === TopSubmissions.POTENTIAL ?
-                                    (vA, vB) => this.props.article.getSubmission(vA).potential > this.props.article.getSubmission(vB).potential ? 1 : -1 :
-                                    (vA, vB) => this.props.article.getSubmission(vA).quality > this.props.article.getSubmission(vB).quality ? 1 : -1
+                                    (vA, vB) => this.props.article.getSubmission(vA).potential < this.props.article.getSubmission(vB).potential ? 1 : -1 :
+                                    (vA, vB) => this.props.article.getSubmission(vA).quality < this.props.article.getSubmission(vB).quality ? 1 : -1
                                 )
-                                .map((version, index, _) => (
-                                    <button 
-                                        key={index}
-                                        className="TopSubmission"
-                                        onClick={() => {this.props.history.push(`/page/${this.props.article.id}/version/${version}/work`)}}
-                                    >
-                                        {this.props.article.getSubmission(version).name}</button>
-                                ))}
+                                .map((version, index, _) => {
+                                    let submission = this.props.article.getSubmission(version)
+                                    
+                                    return (
+                                        <button 
+                                            key={index}
+                                            className="TopSubmission"
+                                            onClick={() => {this.props.history.push(`/page/${this.props.article.id}/version/${version}/work`)}}
+                                        >
+                                            <div className="TopSubmissionContents">
+                                                <p className="TopSubmissionContentsTitle">
+                                                    {submission.name}
+                                                </p>
+                                                <h className="RatingLabel">Quality</h>
+                                                <Rating
+                                                    value={submission.quality}
+                                                    max={3}
+                                                    precision={0.01}
+                                                    size="small"
+                                                    readOnly
+                                                />
+                                                <br/>
+                                                <h className="RatingLabel">Poetntial</h>
+                                                <Rating
+                                                    value={3}
+                                                    max={3}
+                                                    precision={0.01}
+                                                    size="small"
+                                                    readOnly
+                                                />
+                                            </div>
+                                        </button>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 ) : null}
